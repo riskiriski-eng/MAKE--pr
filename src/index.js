@@ -5,7 +5,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const cvsRoutes = require('./routes/cvs');
 const templatesRoutes = require('./routes/templates');
-const aiRoutes = require('./routes/ai');
+// const aiRoutes = require('./routes/ai'); // TODO: Week 4 - Add OpenAI
 const atsRoutes = require('./routes/ats');
 const exportRoutes = require('./routes/export');
 
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/cvs', cvsRoutes);
 app.use('/api/templates', templatesRoutes);
-app.use('/api/ai', aiRoutes);
+// app.use('/api/ai', aiRoutes); // TODO: Week 4
 app.use('/api/ats', atsRoutes);
 app.use('/api/export', exportRoutes);
 
