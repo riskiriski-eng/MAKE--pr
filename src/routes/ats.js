@@ -1,6 +1,7 @@
 const express = require('express');
 const { authMiddleware } = require('../middleware/auth');
-const { triggerWebhook } = require('../config/webhook');
+// const { triggerWebhook } = require('../config/webhook'); // TODO: Add webhooks Week 8
+
 
 const router = express.Router();
 
