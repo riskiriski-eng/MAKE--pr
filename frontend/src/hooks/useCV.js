@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { cvService } from '../services/cvService';
 import { useCVStore } from '../store/cvStore';
 import { useUIStore } from '../store/uiStore';
