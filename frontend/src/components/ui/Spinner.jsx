@@ -1,44 +1,25 @@
 import { clsx } from 'clsx'
 
 /**
- * Spinner & Skeleton Loading Components - PortoCraft Design System
+ * Spinner / Loading Component
  *
- * Design Spec (design-system.md Section 4):
- *   - Spinner Color: Cyan (#0ea5e9) Accent
- *   - Sizes: sm (20px), default (32px), lg (48px)
- *   - WCAG 2.1 AA compliance:
- *       role="status", aria-live="polite", sr-only text
+ * Design spec (design-system.md Section 4 - Loading State):
+ *   - Size: 24px small, 40px large
+ *   - Color: Cyan (#0ea5e9)
+ *   - Animation: Rotate 360° in 1s infinite
  */
-
-export function Spinner({
-  size = 'default',
-  color = 'cyan',
-  label = 'Loading...',
-  className,
-}) {
-  const sizeClasses = {
-    sm: 'w-5 h-5 border-2',
-    default: 'w-8 h-8 border-[3px]',
-    lg: 'w-12 h-12 border-4',
-  }[size] ?? 'w-8 h-8 border-[3px]'
-
-  const colorClasses = {
-    cyan: 'border-slate-200 border-t-cyan',
-    navy: 'border-slate-200 border-t-navy',
-    white: 'border-white/30 border-t-white',
-    orange: 'border-slate-200 border-t-orange',
-  }[color] ?? 'border-slate-200 border-t-cyan'
+export function Spinner({ size = 'default', className, label = 'Loading...' }) {
+  const sizeClass = {
+    sm: 'w-6 h-6 border-2',
+    default: 'w-8 h-8 border-2',
+    lg: 'w-10 h-10 border-[3px]',
+  }[size] ?? 'w-8 h-8 border-2'
 
   return (
     <div
       role="status"
-      aria-live="polite"
-      className={clsx(
-        'inline-block rounded-full animate-spin shrink-0 select-none',
-        sizeClasses,
-        colorClasses,
-        className
-      )}
+      aria-label={label}
+      className={clsx('inline-block rounded-full border-slate-200 animate-spin border-t-cyan', sizeClass, className)}
     >
       <span className="sr-only">{label}</span>
     </div>
@@ -46,65 +27,26 @@ export function Spinner({
 }
 
 /**
- * LoadingState - Accessible component for loading screens & section spinners
+ * LoadingState - Full loading state with spinner + text
  */
-export function LoadingState({
-  text = 'Loading data...',
-  size = 'default',
-  className,
-}) {
+export function LoadingState({ text = 'Loading...', size = 'default', className }) {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className={clsx('flex flex-col sm:flex-row items-center justify-center gap-3 py-8', className)}
-    >
+    <div className={clsx('flex items-center gap-3', className)}>
       <Spinner size={size} label={text} />
-      <span className="text-sm sm:text-base font-medium text-text-muted font-body">
-        {text}
-      </span>
+      <span className="text-body-sm text-text-muted font-body">{text}</span>
     </div>
   )
 }
 
 /**
- * FullPageLoader - Fullscreen backdrop with branded spinner
+ * FullPageLoader - Centered loading overlay for page transitions
  */
-export function FullPageLoader({ text = 'Preparing PortoCraft workspace...' }) {
+export function FullPageLoader({ text = 'Loading...' }) {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="min-h-screen flex flex-col items-center justify-center gap-4 bg-bg-light px-4"
-    >
-      <Spinner size="lg" color="navy" label={text} />
-      <p className="text-base font-medium text-navy font-heading text-center">
-        {text}
-      </p>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-bg-light">
+      <Spinner size="lg" label={text} />
+      <p className="text-body text-text-muted font-body">{text}</p>
     </div>
-  )
-}
-
-/**
- * Skeleton - Pulsing accessible placeholder for content loading
- */
-export function Skeleton({ className, variant = 'rectangle', ...props }) {
-  const variantClass = {
-    text: 'h-4 w-full rounded',
-    circle: 'rounded-full',
-    rectangle: 'rounded-lg',
-  }[variant] ?? 'rounded-lg'
-
-  return (
-    <div
-      aria-hidden="true"
-      className={clsx(
-        'animate-pulse bg-slate-200/80 select-none pointer-events-none',
-        variantClass,
-        className
-      )}
-      {...props}
-    />
   )
 }
 

@@ -1,37 +1,40 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, FileText } from 'lucide-react'
 import { clsx } from 'clsx'
 
 /**
- * Header / Navigation Component - PortoCraft Design System
+ * Header / Navigation Component
  *
- * Design Spec (design-system.md Section 4):
- *   - Height 64px sticky
- *   - Logo: Deep Navy #1e3a8a
- *   - Nav Links: Inter 16px, Hover #0ea5e9, Active #1e3a8a with persistent Cyan underline
- *   - Mobile (<640px): Accessible slide-down menu with touch-friendly 44px targets
+ * Design spec (design-system.md Section 4 - Navigation (Header)):
+ *   - Fixed position, height 64px
+ *   - White bg with light bottom shadow
+ *   - Padding: 0 40px horizontal
+ *   - Logo: Navy semi-bold 20pt, left side
+ *   - Menu items: 32px gap, 16pt Regular
+ *   - Hover: Navy + cyan underline
+ *   - Active: Persistent cyan underline
+ *   - Mobile (<640px): Hamburger menu
  */
-
 const NAV_LINKS = [
   { to: '/templates', label: 'Templates' },
   { to: '/dashboard', label: 'My Projects' },
-  { to: '/components', label: 'Components' },
 ]
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-slate-200 shadow-sm">
-      <div className="flex items-center justify-between h-16 px-4 sm:px-8 max-w-[1440px] mx-auto">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+      <div className="flex items-center justify-between h-16 px-10 sm:px-6 max-w-[1440px] mx-auto">
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2 text-navy font-bold text-xl font-heading no-underline hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan rounded-md px-1"
+          className="flex items-center gap-2 text-navy font-semibold text-xl font-heading no-underline hover:no-underline hover:text-navy"
         >
-          <FileText size={24} className="text-cyan shrink-0" aria-hidden="true" />
-          <span>PortoCraft</span>
+          <FileText size={24} className="text-cyan" />
+          PortoCraft
         </Link>
 
         {/* Desktop Nav */}
@@ -42,12 +45,11 @@ export function Header() {
               to={to}
               className={({ isActive }) =>
                 clsx(
-                  'relative py-2 text-sm font-semibold font-body transition-colors duration-150 no-underline',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan rounded-md px-2',
+                  'relative text-base font-body text-text-primary transition-colors duration-150 no-underline hover:text-navy',
                   'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:rounded-t-sm',
                   isActive
-                    ? 'text-navy after:bg-cyan'
-                    : 'text-text-muted hover:text-navy after:bg-transparent hover:after:bg-cyan/50'
+                    ? 'text-navy font-semibold after:bg-cyan'
+                    : 'after:bg-transparent hover:after:bg-cyan/50'
                 )
               }
             >
@@ -60,16 +62,15 @@ export function Header() {
         <div className="hidden sm:flex items-center gap-4">
           <Link
             to="/templates"
-            className="inline-flex items-center justify-center px-4 py-2 bg-navy text-white font-semibold text-sm rounded-lg transition-all duration-150 hover:bg-navy-dark no-underline shadow-sm hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2"
+            className="inline-flex items-center justify-center px-4 py-2 bg-navy text-white font-semibold text-sm rounded-lg transition-all duration-200 hover:bg-navy-dark no-underline hover:no-underline"
           >
             Get Started
           </Link>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile hamburger */}
         <button
-          type="button"
-          className="sm:hidden w-11 h-11 flex items-center justify-center rounded-lg text-text-primary hover:bg-slate-100 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan"
+          className="sm:hidden p-2 rounded-lg text-text-primary hover:bg-slate-100 transition-colors duration-150"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
@@ -78,10 +79,10 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Overlay */}
       {mobileOpen && (
-        <div className="sm:hidden bg-white border-b border-slate-200 shadow-xl animate-[fadeIn_150ms_ease-out]">
-          <nav className="flex flex-col py-3 px-4 gap-1" aria-label="Mobile navigation">
+        <div className="sm:hidden bg-white border-t border-slate-200 shadow-medium">
+          <nav className="flex flex-col py-4 px-6 gap-1" aria-label="Mobile navigation">
             {NAV_LINKS.map(({ to, label }) => (
               <NavLink
                 key={to}
@@ -89,9 +90,9 @@ export function Header() {
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   clsx(
-                    'px-4 py-3 rounded-lg text-base font-body font-medium transition-colors duration-150 no-underline flex items-center',
+                    'px-4 py-3 rounded-lg text-base font-body transition-colors duration-150 no-underline',
                     isActive
-                      ? 'bg-slate-100 text-navy font-bold border-l-4 border-cyan'
+                      ? 'bg-slate-100 text-navy font-semibold'
                       : 'text-text-primary hover:bg-slate-50 hover:text-navy'
                   )
                 }
@@ -99,11 +100,11 @@ export function Header() {
                 {label}
               </NavLink>
             ))}
-            <div className="mt-2 pt-2 border-t border-slate-100">
+            <div className="mt-3 pt-3 border-t border-slate-200">
               <Link
                 to="/templates"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center w-full px-4 py-3 bg-navy text-white font-semibold text-sm rounded-lg no-underline hover:bg-navy-dark transition-colors duration-150 shadow-sm"
+                className="block w-full text-center px-4 py-3 bg-navy text-white font-semibold text-sm rounded-lg no-underline hover:no-underline hover:bg-navy-dark transition-colors duration-200"
               >
                 Get Started
               </Link>
