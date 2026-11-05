@@ -34,7 +34,7 @@ export function Spinner({
       role="status"
       aria-live="polite"
       className={clsx(
-        'inline-block rounded-full animate-spin shrink-0 select-none',
+        'inline-block rounded-full animate-spin motion-reduce:animate-none shrink-0 select-none',
         sizeClasses,
         colorClasses,
         className
@@ -99,7 +99,7 @@ export function Skeleton({ className, variant = 'rectangle', ...props }) {
     <div
       aria-hidden="true"
       className={clsx(
-        'animate-pulse bg-slate-200/80 select-none pointer-events-none',
+        'animate-pulse motion-reduce:animate-none bg-slate-200/80 select-none pointer-events-none',
         variantClass,
         className
       )}

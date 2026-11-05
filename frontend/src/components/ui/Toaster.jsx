@@ -73,7 +73,7 @@ function ToastContainer({ toasts, onRemove }) {
     <div
       role="region"
       aria-label="Notifications"
-      className="fixed bottom-4 right-4 z-50 flex flex-col gap-2.5 items-end max-w-sm w-full px-4 sm:px-0 pointer-events-none"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-50 flex flex-col gap-2.5 items-center sm:items-end max-w-sm sm:w-full pointer-events-none"
     >
       {toasts.map((t) => (
         <ToastItem key={t.id} {...t} onRemove={onRemove} />
@@ -128,7 +128,7 @@ function ToastItem({ id, message, variant, duration, onRemove }) {
       role="status"
       aria-live="polite"
       className={clsx(
-        'w-full rounded-lg p-4 text-white flex items-start gap-3 shadow-xl border pointer-events-auto transition-all duration-200 select-none',
+        'w-full rounded-lg p-3.5 sm:p-4 text-white flex items-start gap-3 shadow-xl border pointer-events-auto transition-all duration-200 select-none motion-reduce:transform-none motion-reduce:transition-none',
         bg,
         border,
         visible
@@ -141,7 +141,7 @@ function ToastItem({ id, message, variant, duration, onRemove }) {
       <button
         type="button"
         onClick={() => setVisible(false)}
-        className="shrink-0 -mr-1 -mt-1 p-1 rounded-md text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
+        className="shrink-0 -mr-1 -mt-1 p-1.5 rounded-md text-white/80 hover:text-white hover:bg-white/20 active:scale-95 transition-all duration-150 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
         aria-label="Dismiss notification"
       >
         <X size={16} />

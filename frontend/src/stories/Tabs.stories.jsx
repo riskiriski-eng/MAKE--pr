@@ -40,6 +40,16 @@ export const Interactive = () => {
           <p className="text-sm text-text-muted mt-1">Current compliance: 94% (Excellent).</p>
         </TabPanel>
       </div>
+
+      <div className="mt-8 p-4 bg-slate-50 border border-slate-200 rounded-lg max-w-[340px]">
+        <span className="text-xs font-bold text-navy uppercase tracking-wider block mb-2">
+          Mobile Scrollable Tabs (340px)
+        </span>
+        <Tabs tabs={TABS} activeTab={activeTab} onChange={setActiveTab} />
+        <p className="text-[11px] text-text-muted mt-2">
+          Features touch momentum scrolling (<code>touch-pan-x</code>) so users can swipe horizontally across tabs on mobile devices.
+        </p>
+      </div>
     </div>
   )
 }

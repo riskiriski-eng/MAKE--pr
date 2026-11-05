@@ -25,6 +25,26 @@ const preview = {
         ],
       },
     },
+    viewport: {
+      viewports: {
+        mobileSmall: {
+          name: 'Mobile Small (iPhone SE)',
+          styles: { width: '375px', height: '667px' },
+        },
+        mobileLarge: {
+          name: 'Mobile Large (iPhone 14/15)',
+          styles: { width: '390px', height: '844px' },
+        },
+        tablet: {
+          name: 'Tablet (iPad Mini)',
+          styles: { width: '768px', height: '1024px' },
+        },
+        desktop: {
+          name: 'Desktop (1080p)',
+          styles: { width: '1280px', height: '800px' },
+        },
+      },
+    },
   },
 };
 
