@@ -929,7 +929,7 @@ function SkillsSection({ skills, onAdd, onUpdate, onRemove }) {
       ) : (
         <div className="space-y-2">
           {skills.map((skill) => (
-            <SkillField key={skill.id} skill={skill} onUpdate={onUpdate} onRemove={onRemove} />
+            <SkillField key={skill.id} skill={skill} onUpdate={onUpdate} onRemove={removeSkill} />
           ))}
         </div>
       )}
