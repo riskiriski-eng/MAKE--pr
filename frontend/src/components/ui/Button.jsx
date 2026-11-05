@@ -23,27 +23,27 @@ import { clsx } from 'clsx'
  */
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center font-semibold transition-all duration-150 cursor-pointer font-heading select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-[0.98]',
+  'inline-flex items-center justify-center font-semibold transition-all duration-150 cursor-pointer font-heading select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:transform-none disabled:shadow-none active:scale-[0.98] active:translate-y-0 hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none',
   {
     variants: {
       variant: {
         primary:
           'bg-navy text-white hover:bg-navy-dark active:bg-slate-900 shadow-sm hover:shadow-md border border-transparent',
         secondary:
-          'bg-transparent border-2 border-navy text-navy hover:bg-slate-50 active:bg-slate-100',
+          'bg-transparent border-2 border-navy text-navy hover:bg-slate-50 active:bg-slate-100 hover:shadow-sm',
         accent:
           'bg-cyan text-white hover:bg-cyan-dark active:bg-[#0369a1] shadow-sm hover:shadow-md border border-transparent',
         danger:
-          'bg-error text-white hover:bg-red-600 active:bg-red-700 shadow-sm border border-transparent',
+          'bg-error text-white hover:bg-red-600 active:bg-red-700 shadow-sm hover:shadow-md border border-transparent',
         ghost:
-          'bg-transparent text-navy hover:bg-slate-100 active:bg-slate-200 border border-transparent',
+          'bg-transparent text-navy hover:bg-slate-100 active:bg-slate-200 border border-transparent hover:translate-y-0 hover:shadow-none',
         outline:
-          'bg-white border border-slate-300 text-text-primary hover:bg-slate-50 active:bg-slate-100 shadow-sm',
+          'bg-white border border-slate-300 text-text-primary hover:bg-slate-50 active:bg-slate-100 shadow-sm hover:border-slate-400',
       },
       size: {
-        sm: 'h-8 px-3 text-xs sm:text-sm rounded-md gap-1.5',
-        default: 'h-10 px-4 text-sm sm:text-base rounded-lg gap-2',
-        lg: 'h-12 px-6 text-base sm:text-lg rounded-lg gap-2.5',
+        sm: 'h-8 min-h-[32px] px-3 text-xs sm:text-sm rounded-md gap-1.5',
+        default: 'h-10 min-h-[40px] px-4 text-sm sm:text-base rounded-lg gap-2',
+        lg: 'h-12 min-h-[48px] px-6 text-base sm:text-lg rounded-lg gap-2.5',
       },
       fullWidth: {
         true: 'w-full',
@@ -103,7 +103,7 @@ export const Button = forwardRef(function Button(
       {loading ? (
         <>
           <span
-            className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin shrink-0"
+            className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin shrink-0 motion-reduce:animate-none"
             aria-hidden="true"
           />
           <span className="sr-only">Loading...</span>

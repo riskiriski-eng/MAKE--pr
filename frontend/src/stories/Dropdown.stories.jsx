@@ -32,6 +32,21 @@ export const Interactive = () => {
         </p>
       </div>
 
+      <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg max-w-[340px]">
+        <label className="block text-xs font-bold text-navy uppercase tracking-wider mb-2">
+          Mobile Viewport (340px)
+        </label>
+        <Dropdown
+          options={TEMPLATES}
+          value={selected}
+          onChange={setSelected}
+          placeholder="Mobile select..."
+        />
+        <p className="text-[11px] text-text-muted mt-1.5">
+          Features touch momentum scrolling (<code>touch-pan-y</code>) and full viewport containment.
+        </p>
+      </div>
+
       <div>
         <label className="block text-sm font-semibold text-text-primary mb-2">Error State</label>
         <Dropdown

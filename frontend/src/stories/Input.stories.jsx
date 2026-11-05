@@ -67,3 +67,19 @@ export const CheckboxAndToggle = () => {
     </div>
   )
 }
+
+export const MobileTouchErgonomics = () => (
+  <div className="max-w-[340px] p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-4">
+    <span className="text-xs font-bold text-navy uppercase tracking-wider">
+      Mobile Input Ergonomics (340px)
+    </span>
+    <FormField label="Mobile Number" hint="Font size is 16px on mobile to prevent iOS Safari auto-zoom">
+      <Input placeholder="+62 812 3456 7890" />
+    </FormField>
+    <div className="flex flex-col gap-2">
+      <span className="text-xs text-text-muted">≥44px Touch Targets:</span>
+      <Checkbox label="Auto-sync to cloud" defaultChecked />
+      <Toggle label="Public sharing link" checked />
+    </div>
+  </div>
+)
