@@ -66,7 +66,7 @@ export function Tabs({ tabs = [], activeTab, onChange, className, 'aria-label': 
   return (
     <div
       className={clsx(
-        'flex border-b border-slate-200 overflow-x-auto no-scrollbar scroll-smooth',
+        'flex border-b border-slate-200 overflow-x-auto no-scrollbar scroll-smooth flex-nowrap -webkit-overflow-scrolling-touch touch-pan-x',
         className
       )}
       role="tablist"
@@ -90,12 +90,12 @@ export function Tabs({ tabs = [], activeTab, onChange, className, 'aria-label': 
             onClick={() => !tab.disabled && onChange?.(tab.id)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={clsx(
-              'relative px-4 py-3 text-sm font-semibold transition-all duration-150 cursor-pointer bg-transparent border-0 font-heading whitespace-nowrap select-none shrink-0',
+              'relative px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer bg-transparent border-0 font-heading whitespace-nowrap select-none shrink-0 min-h-[44px] flex items-center',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 rounded-t-md',
               isActive
                 ? 'text-navy'
-                : 'text-text-muted hover:text-navy hover:bg-slate-50',
-              tab.disabled && 'opacity-50 cursor-not-allowed text-text-muted'
+                : 'text-text-muted hover:text-navy hover:bg-slate-100/70 active:bg-slate-100',
+              tab.disabled && 'opacity-50 cursor-not-allowed text-text-muted hover:bg-transparent hover:text-text-muted'
             )}
           >
             <span className="flex items-center gap-2">
@@ -120,7 +120,7 @@ export function Tabs({ tabs = [], activeTab, onChange, className, 'aria-label': 
             {/* Active indicator: h-0.5 Cyan bar */}
             {isActive && (
               <span
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan rounded-t-sm"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan rounded-t-sm transition-all duration-200 motion-reduce:transition-none"
                 aria-hidden="true"
               />
             )}

@@ -31,10 +31,10 @@ export const Card = forwardRef(function Card(
 ) {
   const paddingClass = {
     none: 'p-0',
-    sm: 'p-4',
-    default: 'p-6',
-    lg: 'p-8',
-  }[padding] ?? 'p-6'
+    sm: 'p-3 sm:p-4',
+    default: 'p-4 sm:p-6',
+    lg: 'p-6 sm:p-8',
+  }[padding] ?? 'p-4 sm:p-6'
 
   const variantClass = {
     default: 'bg-white border border-slate-200 shadow-light',
@@ -56,13 +56,14 @@ export const Card = forwardRef(function Card(
     <div
       ref={ref}
       className={clsx(
-        'rounded-lg transition-all duration-150',
+        'rounded-lg transition-all duration-200',
         variantClass,
         paddingClass,
         interactive && [
           'cursor-pointer select-none',
-          'hover:shadow-card-hover hover:scale-105 active:scale-[1.01]',
+          'hover:shadow-card-hover hover:-translate-y-1 hover:border-slate-300 active:translate-y-0 active:scale-[0.99]',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2',
+          'motion-reduce:transform-none motion-reduce:transition-none',
         ],
         className
       )}

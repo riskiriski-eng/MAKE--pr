@@ -136,7 +136,7 @@ export function Modal({
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/65 backdrop-blur-sm transition-opacity duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/65 backdrop-blur-sm transition-opacity duration-200 motion-reduce:transition-none"
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -147,10 +147,10 @@ export function Modal({
         ref={modalRef}
         tabIndex={-1}
         className={clsx(
-          'bg-white rounded-xl p-6 sm:p-8 relative w-full mx-auto outline-none',
-          'max-h-[90vh] flex flex-col overflow-hidden',
+          'bg-white rounded-xl p-5 sm:p-7 md:p-8 relative w-full mx-auto outline-none',
+          'max-h-[88vh] sm:max-h-[90vh] flex flex-col overflow-hidden',
           'shadow-2xl border border-slate-200',
-          'animate-[modalIn_200ms_cubic-bezier(0.16,1,0.3,1)_forwards]',
+          'animate-[modalIn_200ms_cubic-bezier(0.16,1,0.3,1)_forwards] motion-reduce:animate-none',
           maxWidthClass,
           className
         )}
@@ -159,7 +159,7 @@ export function Modal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 w-11 h-11 flex items-center justify-center rounded-lg text-text-muted hover:text-text-primary hover:bg-slate-100 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 cursor-pointer z-10"
+          className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 w-11 h-11 flex items-center justify-center rounded-lg text-text-muted hover:text-text-primary hover:bg-slate-100 hover:rotate-90 active:scale-95 transition-all duration-200 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 cursor-pointer z-10"
           aria-label="Close modal"
         >
           <X size={20} />

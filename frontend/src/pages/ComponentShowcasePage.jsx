@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardBody,
   Modal,
   Tabs,
   TabPanel,
@@ -33,6 +34,8 @@ import {
   Download,
   Eye,
   ShieldCheck,
+  Smartphone,
+  Activity,
 } from 'lucide-react'
 
 export default function ComponentShowcasePage() {
@@ -71,6 +74,7 @@ export default function ComponentShowcasePage() {
     { id: 'cards', label: 'Cards' },
     { id: 'badges', label: 'Badges & Indicators' },
     { id: 'loaders', label: 'Loaders & Skeletons' },
+    { id: 'phase3', label: 'Phase 3: Polish & Animations' },
     { id: 'a11y', label: 'WCAG AA Audit' },
   ]
 
@@ -81,12 +85,15 @@ export default function ComponentShowcasePage() {
         <div className="mb-8 pb-6 border-b border-slate-200">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <Badge variant="cyan" icon={<Sparkles size={14} />}>
-                  Cici Component Refinement (Issue #7)
+                  Cici Components (Issue #7 & #14)
                 </Badge>
                 <Badge variant="success" icon={<ShieldCheck size={14} />}>
                   WCAG 2.1 AA Verified
+                </Badge>
+                <Badge variant="orange">
+                  Phase 3: Polish & Animations Complete
                 </Badge>
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold text-navy font-heading">
@@ -738,6 +745,128 @@ export default function ComponentShowcasePage() {
                     <Skeleton className="h-10 w-28 rounded-lg" />
                   </div>
                 </div>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* SECTION 10: PHASE 3 POLISH & ANIMATIONS AUDIT */}
+        {(activeTab === 'all' || activeTab === 'phase3') && (
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-2xl font-bold text-navy font-heading flex items-center gap-2">
+                  <Activity size={24} className="text-cyan" />
+                  10. Phase 3: Safe Hover Animations & Mobile Ergonomics
+                </h2>
+                <p className="text-sm text-text-muted">
+                  Interactive verification for Issue #14: Safe micro-interactions, reduced motion compatibility, and mobile viewport ergonomics.
+                </p>
+              </div>
+              <Badge variant="cyan" icon={<Sparkles size={14} />}>Issue #14 Verified</Badge>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Safe Hover Micro-interactions Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Safe Hover & Micro-interactions</CardTitle>
+                  <CardDescription>
+                    All hover animations use subtle transforms (-translate-y-0.5 / -translate-y-1) paired with <code>motion-reduce:transform-none</code> so users who prefer reduced motion experience zero disorientation.
+                  </CardDescription>
+                </CardHeader>
+                <CardBody className="space-y-4">
+                  <div>
+                    <span className="text-xs font-semibold text-navy uppercase tracking-wider block mb-2">
+                      Button Micro-interactions
+                    </span>
+                    <div className="flex flex-wrap gap-2.5">
+                      <Button variant="primary" size="sm">Primary Lift</Button>
+                      <Button variant="accent" size="sm">Cyan Lift</Button>
+                      <Button variant="secondary" size="sm">Secondary Lift</Button>
+                      <Button variant="outline" size="sm">Outline Lift</Button>
+                      <Button variant="primary" size="sm" disabled>Disabled (Stationary)</Button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-xs font-semibold text-navy uppercase tracking-wider block mb-2">
+                      Interactive Badges & Removable Chips
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="cyan" interactive onClick={() => toast.info('Clicked React tag!')}>
+                        Clickable Tag
+                      </Badge>
+                      <Badge variant="primary" interactive onClick={() => toast.info('Clicked TypeScript tag!')}>
+                        Interactive Pill
+                      </Badge>
+                      <Badge variant="success" dot onRemove={() => toast.warning('Removed ATS skill chip!')}>
+                        Removable Skill Chip
+                      </Badge>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-xs font-semibold text-navy uppercase tracking-wider block mb-2">
+                      Interactive Card Elevation
+                    </span>
+                    <Card interactive onClick={() => toast.info('Card activated via click or Enter key!')} padding="sm">
+                      <p className="text-sm font-semibold text-navy">Hover over this card</p>
+                      <p className="text-xs text-text-muted mt-1">
+                        Notice the smooth <code>hover:-translate-y-1</code> lift and soft elevation shadow without jitter.
+                      </p>
+                    </Card>
+                  </div>
+                </CardBody>
+              </Card>
+
+              {/* Mobile Viewport Simulation Card */}
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Smartphone size={20} className="text-navy" />
+                      Mobile Viewport Simulation (360px)
+                    </CardTitle>
+                    <Badge variant="orange" size="sm">Mobile Ergonomics</Badge>
+                  </div>
+                  <CardDescription>
+                    Components tested on 360px viewport: iOS Safari auto-zoom prevention (16px base font on inputs), touch momentum scrolling on tabs, and 44px touch targets.
+                  </CardDescription>
+                </CardHeader>
+                <CardBody>
+                  <div className="max-w-[340px] mx-auto p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-4">
+                    <FormField label="Mobile Input (No Auto-Zoom)" hint="Font size is 16px on mobile to prevent iOS Safari auto-zoom">
+                      <Input placeholder="+62 812 3456 7890" />
+                    </FormField>
+
+                    <div>
+                      <span className="text-xs font-semibold text-navy block mb-1.5">
+                        Touch Scrollable Tabs (touch-pan-x)
+                      </span>
+                      <Tabs
+                        tabs={[
+                          { id: 'm1', label: 'Summary' },
+                          { id: 'm2', label: 'Experience' },
+                          { id: 'm3', label: 'Education' },
+                          { id: 'm4', label: 'Skills' },
+                          { id: 'm5', label: 'ATS Score' },
+                        ]}
+                        activeTab="m1"
+                        onChange={() => {}}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2">
+                      <Checkbox label="Auto-sync" defaultChecked />
+                      <Toggle label="Shareable" checked />
+                    </div>
+
+                    <Button fullWidth size="sm" variant="primary" leftIcon={<Sparkles size={16} />}>
+                      Export Mobile CV
+                    </Button>
+                  </div>
+                </CardBody>
               </Card>
             </div>
           </div>

@@ -1,8 +1,8 @@
 # PortoCraft Component Library & Accessibility Documentation
 **Author:** Cici (Component Development Lead)  
-**Task Reference:** Issue #7: `[Task] Cici - Component Refinement & Accessibility`  
+**Task Reference:** Issue #7 (`[Task] Cici - Component Refinement & Accessibility`) & Issue #14 (`[Phase 3] Cici - Component Polish & Animations`)  
 **Design Reference:** `docs/design-system.md` by Anggrea (Design Lead)  
-**Standard:** WCAG 2.1 AA Compliance  
+**Standard:** WCAG 2.1 AA Compliance + WCAG 2.2 Reduced Motion (2.3.3)  
 
 ---
 
@@ -10,12 +10,31 @@
 
 The PortoCraft UI Component Library provides accessible, robust, high-performance base components engineered with React 18, Tailwind CSS, and Class Variance Authority (`cva`). All components strictly adhere to the PortoCraft Design System tokens (Navy `#1e3a8a`, Cyan `#0ea5e9`, Orange `#f97316`).
 
-### Key Enhancements in Issue #7:
+### Key Enhancements in Phase 2 (Issue #7):
 1. **Edge Case Coverage:** Explicit loading spinners, error states, and disabled behaviors across all interactive elements.
 2. **WCAG 2.1 AA Compliance:** High contrast color ratios, explicit form label linkages, live regions (`role="alert"`, `role="status"`), and roving tab indices.
 3. **Keyboard Navigation:** Full WAI-ARIA pattern implementations for Modals (Focus Trap), Dropdowns (Combobox/Listbox), Tabs, and Interactive Cards.
 4. **Storybook Specifications:** Storybook stories located in `src/stories/` and interactive live showcase page at `/components`.
 5. **Mobile Touch Ergonomics:** Minimum 44x44px touch-target bounding boxes for mobile viewports.
+
+### Key Enhancements in Phase 3 (Issue #14):
+1. **Safe Hover Animations & Micro-interactions:**
+   - Subtle vertical lifts (`hover:-translate-y-0.5` on Buttons, `hover:-translate-y-1` on Cards, `hover:-translate-y-0.5` on Badges) with smooth elevation shadow transitions.
+   - Active press feedback (`active:scale-[0.98]` or `active:scale-[0.99]`).
+   - Modal close button micro-rotation (`hover:rotate-90 active:scale-95`).
+   - Disabled controls remain completely stationary (`disabled:transform-none disabled:shadow-none`).
+2. **Strict Reduced-Motion Accessibility (WCAG 2.3.3):**
+   - Every animated component includes `motion-reduce:transform-none` and `motion-reduce:transition-none`.
+   - Global stylesheet rule resets `animation-duration` and `transition-duration` to 0.01ms when `@media (prefers-reduced-motion: reduce)` is active.
+3. **Mobile Responsiveness & iOS Safari Auto-Zoom Fix:**
+   - All input controls (Input, Textarea, Select) enforce 16px font size on mobile viewports (`text-base sm:text-sm`), preventing iOS Safari from forcing an unwanted page zoom on input focus.
+   - Tabs support touch momentum scrolling (`touch-pan-x`) with hidden scrollbars for compact mobile screen widths (320px–390px).
+   - Dropdown popups feature touch panning (`touch-pan-y`) and boundary containment.
+   - Modals adapt with responsive padding (`p-5 sm:p-7 md:p-8`) and flexible mobile max-height.
+4. **Storybook Catalog Complete:**
+   - Added `Toaster.stories.jsx` with full variant and live triggers.
+   - Added Mobile Viewport and Safe Hover stories across all component story files.
+   - Configured standard mobile, tablet, and desktop viewports in Storybook preview.
 
 ---
 
@@ -130,10 +149,28 @@ The PortoCraft UI Component Library provides accessible, robust, high-performanc
 | **3.3.1 Error Identification** | Errors described in text and associated with fields | `FormField` connects `errorId` via `aria-describedby` and displays `role="alert"`. | PASS |
 | **4.1.2 Name, Role, Value** | Correct ARIA roles and states on custom widgets | `role="combobox"`, `role="listbox"`, `role="dialog"`, `role="tablist"`, `aria-expanded`, `aria-selected`. | PASS |
 | **4.1.3 Status Messages** | Status updates announced to assistive technology | Toast notifications use `role="region"` and `role="status"` with `aria-live="polite"`. | PASS |
+| **2.3.3 Animation from Interactions** | Motion animation triggered by interaction can be disabled | `motion-reduce:transform-none`, `motion-reduce:transition-none`, and `@media (prefers-reduced-motion: reduce)` on all animated components. | PASS |
+| **1.4.4 Resize Text & No Auto-Zoom** | Form controls operable without unexpected viewport zooming | Input/Select/Textarea formatted with 16px font on mobile (`text-base sm:text-sm`) to avoid iOS Safari zoom glitches. | PASS |
 
 ---
 
-## 4. How to Run & Verify
+## 4. Component Stories Catalog (`src/stories/`)
+
+| Component | Story File | Key Variants & Interactive Scenarios |
+|-----------|------------|--------------------------------------|
+| **Button** | `Button.stories.jsx` | Primary, Secondary, Accent, Danger, Ghost, Icons, Loading, Disabled, SafeHoverMicroInteractions, MobileResponsiveness |
+| **Badge** | `Badge.stories.jsx` | AllVariants, InteractiveSkillTags (removable 'x' chips), FilterPills, MobileResponsiveBadges |
+| **Card** | `Card.stories.jsx` | StandardCard, InteractiveCards (smooth lift & active compression), MobileCardLayout (responsive padding) |
+| **Dropdown** | `Dropdown.stories.jsx` | Interactive (keyboard WAI-ARIA), MobileViewport (touch-pan-y), ErrorState, LoadingState |
+| **Input & Form** | `Input.stories.jsx` | Default, WithIcons, ErrorState, FormFieldExample, CheckboxAndToggle, MobileTouchErgonomics |
+| **Modal** | `Modal.stories.jsx` | Interactive (Default, AI Large, Alert Small), Focus Trap demo, 44px close button with 90° micro-rotation |
+| **Tabs** | `Tabs.stories.jsx` | Interactive (keyboard navigation Arrow/Home/End), MobileScrollableTabs (touch-pan-x) |
+| **Toaster** | `Toaster.stories.jsx` | Interactive (Success, Error, Warning, Info live triggers), AllVariantsStatic, Live region announcements |
+| **Spinner** | `Spinner.stories.jsx` | SpinnersAndLoaders, LoadingState, Skeletons with pulsing and reduced-motion fallbacks |
+
+---
+
+## 5. How to Run & Verify
 
 1. **Start Development Server:**
    ```bash

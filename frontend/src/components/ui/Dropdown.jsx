@@ -192,7 +192,7 @@ export function Dropdown({
         onClick={() => setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
         className={clsx(
-          'w-full h-10 flex items-center justify-between px-3.5 bg-white border rounded-lg text-sm sm:text-base transition-all duration-150 cursor-pointer font-body select-none',
+          'w-full h-10 min-h-[40px] flex items-center justify-between px-3.5 bg-white border rounded-lg text-sm sm:text-base transition-all duration-150 cursor-pointer font-body select-none',
           'focus-visible:outline-none focus-visible:border-cyan focus-visible:border-2 focus-visible:ring-2 focus-visible:ring-cyan/20',
           isOpen
             ? 'border-cyan border-2 ring-2 ring-cyan/20'
@@ -220,7 +220,7 @@ export function Dropdown({
             <ChevronDown
               size={18}
               className={clsx(
-                'text-text-muted transition-transform duration-200',
+                'text-text-muted transition-transform duration-200 ease-out motion-reduce:transition-none',
                 isOpen && 'rotate-180 text-cyan'
               )}
               aria-hidden="true"
@@ -237,7 +237,7 @@ export function Dropdown({
           role="listbox"
           tabIndex={-1}
           aria-label={placeholder}
-          className="absolute z-50 mt-1.5 w-full bg-white border border-slate-200 rounded-lg shadow-xl py-1 max-h-60 overflow-y-auto focus:outline-none animate-[fadeIn_150ms_ease-out_forwards]"
+          className="absolute z-50 mt-1.5 w-full bg-white border border-slate-200 rounded-lg shadow-xl py-1 max-h-60 sm:max-h-72 overflow-y-auto overscroll-contain touch-pan-y focus:outline-none animate-[fadeIn_150ms_ease-out_forwards] motion-reduce:animate-none"
         >
           {options.length === 0 ? (
             <li className="px-3.5 py-2.5 text-sm text-text-muted text-center font-body">

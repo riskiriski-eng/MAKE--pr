@@ -29,10 +29,10 @@ export const Input = forwardRef(function Input(
   ref
 ) {
   const sizeClasses = {
-    sm: 'h-8 text-xs sm:text-sm px-2.5 py-1',
-    default: 'h-10 text-sm sm:text-base px-3.5 py-2.5',
-    lg: 'h-12 text-base sm:text-lg px-4 py-3',
-  }[size] ?? 'h-10 text-sm sm:text-base px-3.5 py-2.5'
+    sm: 'h-8 min-h-[32px] text-xs sm:text-sm px-2.5 py-1',
+    default: 'h-10 min-h-[40px] text-base sm:text-sm px-3.5 py-2',
+    lg: 'h-12 min-h-[48px] text-base sm:text-lg px-4 py-3',
+  }[size] ?? 'h-10 min-h-[40px] text-base sm:text-sm px-3.5 py-2'
 
   const inputElement = (
     <input
@@ -108,7 +108,7 @@ export const Textarea = forwardRef(function Textarea(
       aria-invalid={error ? 'true' : 'false'}
       aria-describedby={ariaDescribedBy}
       className={clsx(
-        'w-full bg-white border rounded-lg px-3.5 py-2.5 text-sm sm:text-base text-text-primary transition-all duration-150 font-body resize-y min-h-[100px] placeholder:text-text-muted',
+        'w-full bg-white border rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-text-primary transition-all duration-150 font-body resize-y min-h-[100px] placeholder:text-text-muted',
         'focus:outline-none focus:border-cyan focus:border-2 focus:ring-2 focus:ring-cyan/20',
         'disabled:bg-slate-100 disabled:text-text-muted disabled:cursor-not-allowed disabled:border-slate-200',
         error
@@ -145,7 +145,7 @@ export const Select = forwardRef(function Select(
         aria-invalid={error ? 'true' : 'false'}
         aria-describedby={ariaDescribedBy}
         className={clsx(
-          'w-full bg-white border rounded-lg px-3.5 py-2.5 pr-10 h-10 text-sm sm:text-base text-text-primary transition-all duration-150 font-body cursor-pointer appearance-none',
+          'w-full bg-white border rounded-lg px-3.5 py-2.5 pr-10 h-10 min-h-[40px] text-base sm:text-sm text-text-primary transition-all duration-150 font-body cursor-pointer appearance-none',
           'focus:outline-none focus:border-cyan focus:border-2 focus:ring-2 focus:ring-cyan/20',
           'disabled:bg-slate-100 disabled:text-text-muted disabled:cursor-not-allowed disabled:border-slate-200',
           error
@@ -265,9 +265,9 @@ export const Checkbox = forwardRef(function Checkbox(
           disabled={disabled}
           aria-invalid={error ? 'true' : 'false'}
           className={clsx(
-            'w-5 h-5 rounded border text-navy transition-all duration-150 cursor-pointer',
+            'w-5 h-5 rounded border text-navy transition-all duration-150 cursor-pointer active:scale-95 motion-reduce:transform-none',
             'focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2',
-            'disabled:cursor-not-allowed disabled:bg-slate-100',
+            'disabled:cursor-not-allowed disabled:bg-slate-100 disabled:transform-none',
             error ? 'border-error' : 'border-slate-300 hover:border-slate-400'
           )}
           {...props}
@@ -318,16 +318,16 @@ export function Toggle({
           onClick={() => !disabled && onChange?.(!checked)}
           onKeyDown={handleKeyDown}
           className={clsx(
-            'relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer',
+            'relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer active:scale-95 motion-reduce:transform-none motion-reduce:transition-none',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2',
             checked ? 'bg-navy' : 'bg-slate-300',
-            disabled && 'cursor-not-allowed opacity-60'
+            disabled && 'cursor-not-allowed opacity-60 disabled:transform-none'
           )}
         >
           <span
             aria-hidden="true"
             className={clsx(
-              'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-md transform ring-0 transition duration-200 ease-in-out',
+              'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-md transform ring-0 transition duration-200 ease-in-out motion-reduce:transition-none',
               checked ? 'translate-x-5' : 'translate-x-0'
             )}
           />
